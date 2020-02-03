@@ -16,8 +16,8 @@ class UserTableSeeder extends Seeder
 
         User::create([
             'name' => 'Admin',
-            'email' => 'biuro@septen.pl',
-            'password' => Hash::make('1qaz.2wsx'),
+            'email' => 'kasia@gerard.pl',
+            'password' => Hash::make('gerasia'),
             'admin' => true,
         ]);
 

@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'UserController@index')->name('index');
 
 Route::namespace('Admin')->name('admin.')->prefix('administracja')->group(function () {
 
