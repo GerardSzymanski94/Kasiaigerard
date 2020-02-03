@@ -20,6 +20,15 @@ Route::namespace('Admin')->name('admin.')->prefix('administracja')->group(functi
         Route::get('/', 'DashboardController@index')->name('index');
     });
 
+    Route::prefix('guest')->name('guest.')->group(function () {
+        Route::get('/', 'GuestController@index')->name('index');
+        Route::post('/store', 'GuestController@store')->name('store');
+        Route::post('/update/{guest}', 'GuestController@update')->name('update');
+        Route::get('/delete/{guest}', 'GuestController@destroy')->name('delete');
+        Route::get('/confirm/{guest}', 'GuestController@confirm')->name('confirm');
+        Route::get('/canceled/{guest}', 'GuestController@canceled')->name('canceled');
+    });
+
 
     Route::get('login', 'LoginController@index')->name('login');
 
