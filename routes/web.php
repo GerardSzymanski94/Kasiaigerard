@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'UserController@index')->name('index');
+Route::get('/send_email', 'UserController@sendEmail')->name('send_email');
 
 Route::namespace('Admin')->name('admin.')->prefix('administracja')->group(function () {
 
