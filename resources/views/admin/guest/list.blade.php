@@ -8,10 +8,88 @@
             Dodano gościa
         </div>
     @endif
+    @if(\Illuminate\Support\Facades\Session::has('edit'))
+
+        <div class="alert alert-success">
+            Edytowano gościa
+        </div>
+    @endif
+
+
+    <div class="row">
+        <form action="{{ route('admin.guest.store') }}" method="post">
+            @csrf
+            <div class="row">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="name">Imię i nazwisko</label>
+                        <input type="text" name="name" placeholder="Imię i nazwisko" class="form-control">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="name">Osoba towarzysząca</label>
+                        <select name="person" class="form-control">
+                            <option value="0">
+                                Nie
+                            </option>
+                            <option value="1">
+                                Tak
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="name">Ilość dzieci</label>
+                        <select name="childrens" class="form-control">
+                            <option value="0">
+                                0
+                            </option>
+                            <option value="1">
+                                1
+                            </option>
+                            <option value="2">
+                                2
+                            </option>
+                            <option value="3">
+                                3
+                            </option>
+                            <option value="4">
+                                4
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="side">Od kogo</label>
+                        <select name="side" class="form-control">
+                            <option value="0">
+                                Kasia
+                            </option>
+                            <option value="1">
+                                Gerard
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="submit">- </label>
+                        <input type="submit" value="Dodaj" class="btn btn-primary form-control">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
 
     <div class="x_panel">
         <div class="x_title">
             <h2>
+                Potwierdzonych gości: {{ $confirmed }}
             </h2>
             <div class="clearfix"></div>
         </div>
@@ -19,6 +97,7 @@
             <table class="table">
                 <thead>
                 <tr>
+                    <th></th>
                     <th>Imię i nazwisko</th>
                     <th>Osoba towarzysąca</th>
                     <th>Dzieci</th>
@@ -28,8 +107,10 @@
                 </tr>
                 </thead>
                 <tbody>
+
                 <tr>
                     <td>
+                    </td><td>
                         <input placeholder="Wyszukaj gościa" id="search" class="form-control">
                     </td>
                     <td>
@@ -69,6 +150,9 @@
                 </tr>
                 @foreach($guests as $guest)
                     <tr>
+                        <td class="col-md-1">
+                            {{ $loop->iteration }}
+                        </td>
                         <td class="player">
                             {{ $guest->name }}
                         </td>
@@ -86,7 +170,7 @@
                         </td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                {{-- <a href="{{ route('admin.guest.edit', ['guest'=>$guest->id]) }}" class="btn btn-secondary btn-primary"><i class="fa fa-edit"></i>Edytuj</a>--}}
+                                 <a href="{{ route('admin.guest.edit', ['guest'=>$guest->id]) }}" class="btn btn-secondary btn-primary"><i class="fa fa-edit"></i>Edytuj</a>
                                 <a href="{{ route('admin.guest.delete', ['guest'=>$guest->id]) }}" class="btn btn-secondary btn-danger"
                                    onclick="return confirm('Na pewno usunąć?');"><i class="fa fa-remove"></i>Usuń</a>
                             </div>
@@ -105,73 +189,7 @@
                         </td>
                     </tr>
                 @endforeach
-                <td colspan="5">
-                    <form action="{{ route('admin.guest.store') }}" method="post">
-                        @csrf
-                        <div class="row">
-                            <div class="form-row">
-                                <div class="form-group col-md-3">
-                                    <label for="name">Imię i nazwisko</label>
-                                    <input type="text" name="name" placeholder="Imię i nazwisko" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-3">
-                                    <label for="name">Osoba towarzysząca</label>
-                                    <select name="person" class="form-control">
-                                        <option value="0">
-                                            Nie
-                                        </option>
-                                        <option value="1">
-                                            Tak
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-2">
-                                    <label for="name">Ilość dzieci</label>
-                                    <select name="childrens" class="form-control">
-                                        <option value="0">
-                                            0
-                                        </option>
-                                        <option value="1">
-                                            1
-                                        </option>
-                                        <option value="2">
-                                            2
-                                        </option>
-                                        <option value="3">
-                                            3
-                                        </option>
-                                        <option value="4">
-                                            4
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-2">
-                                    <label for="side">Od kogo</label>
-                                    <select name="side" class="form-control">
-                                        <option value="0">
-                                            Kasia
-                                        </option>
-                                        <option value="1">
-                                            Gerard
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-2">
-                                    <label for="submit">- </label>
-                                    <input type="submit" value="Dodaj" class="btn btn-primary form-control">
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </td>
+
                 </tbody>
             </table>
         </div>

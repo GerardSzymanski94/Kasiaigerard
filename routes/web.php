@@ -25,6 +25,7 @@ Route::namespace('Admin')->name('admin.')->prefix('administracja')->group(functi
         Route::get('/', 'GuestController@index')->name('index');
         Route::post('/store', 'GuestController@store')->name('store');
         Route::post('/update/{guest}', 'GuestController@update')->name('update');
+        Route::get('/edit/{guest}', 'GuestController@edit')->name('edit');
         Route::get('/delete/{guest}', 'GuestController@destroy')->name('delete');
         Route::get('/confirm/{guest}', 'GuestController@confirm')->name('confirm');
         Route::get('/canceled/{guest}', 'GuestController@canceled')->name('canceled');

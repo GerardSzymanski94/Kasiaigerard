@@ -52,6 +52,9 @@
                             <li>
                                 <a href="{{ route('admin.index') }}"><i class="fa fa-home"></i> Strona główna</a>
                             </li>
+                            <li>
+                                <a href="{{ route('admin.guest.index') }}"><i class="fa fa-users"></i> Goście</a>
+                            </li>
                         </ul>
                     </div>
 
